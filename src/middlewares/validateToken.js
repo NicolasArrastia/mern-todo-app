@@ -9,6 +9,8 @@ export const authRequired = (req, res, next) => {
 
   jwt.verify(token, TOKEN_SECRET, (err, user) => {
     if (err) {
+      res.cookie("token", "");
+
       return res
         .status(401)
         .json({ message: "Invalid token, authorization denied" });
